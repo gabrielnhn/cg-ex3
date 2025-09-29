@@ -582,6 +582,10 @@ int main(int argc, char** argv)
 
                             // === SET YOUR DIFFUSE TOON UNIFORMS HERE ===
                             // Values that you may want to pass to the shader are stored in light, shadingData.
+                            glUniform3fv(toonDiffuseShader.getUniformLocation("kd"), 1, glm::value_ptr(shadingData.kd));
+                            glUniform3fv(toonDiffuseShader.getUniformLocation("lightPos"), 1, glm::value_ptr(light.position));
+                            glUniform3fv(toonDiffuseShader.getUniformLocation("lightColor"), 1, glm::value_ptr(light.color));
+                        
                             render(toonDiffuseShader);
                         }
                         if (toonLightingSpecular) {
@@ -610,12 +614,12 @@ int main(int argc, char** argv)
 
                         // === SET YOUR PHONG/BLINN PHONG UNIFORMS HERE ===
                         // Values that you may want to pass to the shader are stored in light, shadingData and cameraPos.
-                        glUniform3fv(phongShader.getUniformLocation("ks"), 1, glm::value_ptr(shadingData.ks));
-                        glUniform3fv(phongShader.getUniformLocation("lightPos"), 1, glm::value_ptr(light.position));
-                        glUniform3fv(phongShader.getUniformLocation("lightColor"), 1, glm::value_ptr(light.color));
-                        glUniform3fv(phongShader.getUniformLocation("viewPos"), 1, glm::value_ptr(cameraPos));
-                        glUniform1fv(phongShader.getUniformLocation("shininess"), 1, &shadingData.shininess);
-                        
+                        glUniform3fv(shader.getUniformLocation("ks"), 1, glm::value_ptr(shadingData.ks));
+                        glUniform3fv(shader.getUniformLocation("lightPos"), 1, glm::value_ptr(light.position));
+                        glUniform3fv(shader.getUniformLocation("lightColor"), 1, glm::value_ptr(light.color));
+                        glUniform3fv(shader.getUniformLocation("viewPos"), 1, glm::value_ptr(cameraPos));
+                        glUniform1fv(shader.getUniformLocation("shininess"), 1, &shadingData.shininess);
+
                         render(shader);
                     }
                 }
