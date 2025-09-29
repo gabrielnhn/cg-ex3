@@ -19,7 +19,7 @@ void main()
 {
     // Ensure the normal is always oriented towards the viewer
     vec3 N = normalize(fragNormal);
-    if(dot(N, viewPos) > 0.0) {
+    if(dot(N, viewPos) < 0.0) {
         N = -N;
     }
 

@@ -601,7 +601,7 @@ int main(int argc, char** argv)
                         glUniform3fv(lambertShader.getUniformLocation("kd"), 1, glm::value_ptr(shadingData.kd));
                         glUniform3fv(lambertShader.getUniformLocation("lightPos"), 1, glm::value_ptr(light.position));
                         glUniform3fv(lambertShader.getUniformLocation("lightColor"), 1, glm::value_ptr(light.color));
-                        glUniform3fv(lambertShader.getUniformLocation("viewPos"), 1, glm::value_ptr(cameraPos));
+                        // glUniform3fv(lambertShader.getUniformLocation("viewPos"), 1, glm::value_ptr(cameraPos));
                         render(lambertShader);
                     }
                     if (phongSpecularLighting || blinnPhongSpecularLighting) {
