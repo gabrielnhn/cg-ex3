@@ -585,6 +585,7 @@ int main(int argc, char** argv)
                             glUniform3fv(toonDiffuseShader.getUniformLocation("kd"), 1, glm::value_ptr(shadingData.kd));
                             glUniform3fv(toonDiffuseShader.getUniformLocation("lightPos"), 1, glm::value_ptr(light.position));
                             glUniform3fv(toonDiffuseShader.getUniformLocation("lightColor"), 1, glm::value_ptr(light.color));
+                            glUniform1i(toonDiffuseShader.getUniformLocation("discrete_steps"), shadingData.toonDiscretize);
                         
                             render(toonDiffuseShader);
                         }

@@ -15,14 +15,10 @@ in vec3 fragPos; // World-space position
 in vec3 fragNormal; // World-space normal
 void main()
 {
-    float diff[discrete_steps];
-    for(int i = 0; i < discrete_steps; i++)
-    {
-        diff[i] = kd * (i/discrete_steps);
-    }
+    // outColor = vec4(kd * lightColor * dot(fragNormal, lightPos), 1); 
+    vec3 precolor = vec3(kd * lightColor * dot(fragNormal, lightPos)); 
 
-    vec3 diffuse = kd; 
-
-
-    outColor = vec4(diffuse * lightColor * dot(fragNormal, lightPos), 1); 
+    // quantized
+    vec3 postcolor = floor(precolor * discrete_steps) / discrete_steps; 
+    outColor = vec4(postcolor, 1.0);
 }
