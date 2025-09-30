@@ -586,14 +586,15 @@ int main(int argc, char** argv)
                             glUniform3fv(toonDiffuseShader.getUniformLocation("lightPos"), 1, glm::value_ptr(light.position));
                             glUniform3fv(toonDiffuseShader.getUniformLocation("lightColor"), 1, glm::value_ptr(light.color));
                             glUniform1i(toonDiffuseShader.getUniformLocation("discrete_steps"), shadingData.toonDiscretize);
-                        
+                            
                             render(toonDiffuseShader);
                         }
                         if (toonLightingSpecular) {
                             toonSpecularShader.bind();
-
+                            
                             // === SET YOUR SPECULAR TOON UNIFORMS HERE ===
                             // Values that you may want to pass to the shader are stored in light, shadingData and cameraPos.
+                            glUniform1f(toonSpecularShader.getUniformLocation("threshold"), shadingData.toonSpecularThreshold);
                             render(toonSpecularShader);
                         }
                     }

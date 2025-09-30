@@ -17,17 +17,14 @@ in vec3 fragNormal; // World-space normal
 
 void main()
 {
-    // Ensure the normal is always oriented towards the viewer
+    vec3 V = normalize(viewPos - fragPos);
+    vec3 L = normalize(lightPos - fragPos);
     vec3 N = normalize(fragNormal);
-    if(dot(N, viewPos) < 0.0) {
+    if(dot(N, V) < 0.0) {
         N = -N;
     }
 
-    // Output the normal as color
-    // outColor = vec4(abs(fragNormal), 1.0);
-    // outColor = vec4(kd * lightColor * dot(fragNormal, lightPos), 1);
-
-    vec3 reflection = 2 * dot(lightPos, fragNormal) * fragNormal - lightPos;
-    float specular = clamp(dot(reflection, viewPos), 0, 1); 
+    vec3 reflection = 2 * dot(L, N) * N - L;
+    float specular = clamp(dot(reflection, V), 0, 1); 
     outColor = vec4(ks * lightColor * pow(specular, shininess), 1.0); 
 }

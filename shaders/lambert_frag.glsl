@@ -15,11 +15,8 @@ in vec3 fragNormal; // World-space normal
 
 void main()
 {
-    // vec3 N = normalize(fragNormal);
-    // if(dot(N, viewPos) < 0.0) {
-    //     N = -N;
-    // }
-    // Output the normal as color
-    // outColor = vec4(abs(fragNormal), 1.0);
-    outColor = vec4(kd * lightColor * dot(fragNormal, lightPos), 1); 
+    vec3 L = normalize(lightPos - fragPos);
+    
+
+    outColor = vec4(kd * lightColor * dot(fragNormal, L), 1); 
 }
